@@ -16,7 +16,7 @@
   </div>
 
   <script>
-    const supabase = supabase.createClient('https://YOUR-PROJECT.supabase.co', 'YOUR-ANON-KEY');
+    const supabase = supabase.createClient('https://krfypuabqzalzqbgeeud.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyZnlwdWFicXphbHpxYmdlZXVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4ODA2ODgsImV4cCI6MjA2MzQ1NjY4OH0._kjP_fN499beZ6DhiXkS9M1PD9ZgBDVj6xb_Yd65d54');
     async function login() {
       const { error } = await supabase.auth.signInWithPassword({
         email: document.getElementById('loginEmail').value,
