@@ -1,43 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Login</h1>
-    <input type="email" id="loginEmail" placeholder="Email"><br>
-    <input type="password" id="loginPassword" placeholder="Password"><br>
-    <button id="loginBtn">Login</button>
-    <p class="message">Don't have an account? <a href="index.html">Register</a></p>
-  </div>
-
-  <script type="module">
-    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-
-    const supabase = createClient(
-      'https://krfypuabqzalzqbgeeud.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyZnlwdWFicXphbHpxYmdlZXVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4ODA2ODgsImV4cCI6MjA2MzQ1NjY4OH0._kjP_fN499beZ6DhiXkS9M1PD9ZgBDVj6xb_Yd65d54'
-    );
-
-    document.getElementById("loginBtn").addEventListener("click", async () => {
-      const email = document.getElementById("loginEmail").value;
-      const password = document.getElementById("loginPassword").value;
-
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-      if (error) {
-        alert("Login failed: " + error.message);
-      } else {
-        window.location.href = "dashboard.html";
-      }
-    });
-  </script>
-</body>
-</html><!DOCTYPE html>
-<html>
-<head>
   <title>Register</title>
   <link rel="stylesheet" href="style.css">
 </head>
