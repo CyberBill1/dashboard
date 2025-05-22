@@ -1,48 +1,29 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Class Registration</title>
+  <title>Register</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-  <h2>Register</h2>
-  <input type="email" id="regEmail" placeholder="Email"><br>
-  <input type="password" id="regPassword" placeholder="Password"><br>
-  <button onclick="register()">Register</button>
+  <div class="container">
+    <h1>Class Registration</h1>
+    <input type="email" id="regEmail" placeholder="Email"><br>
+    <input type="password" id="regPassword" placeholder="Password"><br>
+    <button onclick="register()">Register</button>
 
-  <h2>Login</h2>
-  <input type="email" id="loginEmail" placeholder="Email"><br>
-  <input type="password" id="loginPassword" placeholder="Password"><br>
-  <button onclick="login()">Login</button>
-</div>
+    <p class="message">Already registered? <a href="login.html">Log in</a></p>
+  </div>
+
   <script>
-    const supabase = supabase.createClient(
-      'https://YOUR-PROJECT.supabase.co', // replace with your Supabase URL
-      'YOUR-ANON-KEY' // replace with your public anon key
-    );
-
+    const supabase = supabase.createClient('https://YOUR-PROJECT.supabase.co', 'YOUR-ANON-KEY');
     async function register() {
       const { error } = await supabase.auth.signUp({
         email: document.getElementById('regEmail').value,
         password: document.getElementById('regPassword').value
       });
       if (error) alert(error.message);
-      else alert('Check your email to confirm!');
-    }
-
-    async function login() {
-      const { error, data } = await supabase.auth.signInWithPassword({
-        email: document.getElementById('loginEmail').value,
-        password: document.getElementById('loginPassword').value
-      });
-      if (error) alert(error.message);
-      else {
-        alert('Login successful!');
-        window.location.href = "dashboard.html"; // Redirect on success
-      }
+      else alert('Check your email to confirm registration!');
     }
   </script>
 </body>
