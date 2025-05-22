@@ -16,15 +16,23 @@
   </div>
 
   <script>
-    const supabase =https://krfypuabqzalzqbgeeud.supabase.co supabase.createClient('', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyZnlwdWFicXphbHpxYmdlZXVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4ODA2ODgsImV4cCI6MjA2MzQ1NjY4OH0._kjP_fN499beZ6DhiXkS9M1PD9ZgBDVj6xb_Yd65d54');
-    async function register() {
-      const { error } = await supabase.auth.signUp({
-        email: document.getElementById('regEmail').value,
-        password: document.getElementById('regPassword').value
-      });
-      if (error) alert(error.message);
-      else alert('Check your email to confirm registration!');
+  const supabaseUrl = 'https://krfypuabqzalzqbgeeud.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyZnlwdWFicXphbHpxYmdlZXVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4ODA2ODgsImV4cCI6MjA2MzQ1NjY4OH0._kjP_fN499beZ6DhiXkS9M1PD9ZgBDVj6xb_Yd65d54';
+
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  async function register() {
+    const email = document.getElementById('regEmail').value;
+    const password = document.getElementById('regPassword').value;
+
+    const { data, error } = await supabase.auth.signUp({ email, password });
+
+    if (error) {
+      alert(error.message);
+    } else {
+      alert('Check your email to confirm registration!');
     }
-  </script>
+  }
+</script>
 </body>
 </html>
