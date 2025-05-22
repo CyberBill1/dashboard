@@ -12,9 +12,9 @@
   </div>
 
   <script>
-    const supabase = supabase.createClient('https://YOUR-PROJECT.supabase.co', 'YOUR-ANON-KEY');
+    const supabase =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyZnlwdWFicXphbHpxYmdlZXVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4ODA2ODgsImV4cCI6MjA2MzQ1NjY4OH0._kjP_fN499beZ6DhiXkS9M1PD9ZgBDVj6xb_Yd65d54 supabase.createClient('', '');
     async function checkUser() {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session } } = await supabase.auth.getSession();https://krfypuabqzalzqbgeeud.supabase.co
       if (!session) window.location.href = "login.html";
     }
     async function logout() {
