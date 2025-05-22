@@ -9,12 +9,13 @@
 <body>
   <div class="container">
     <h1>Login</h1>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button onclick="login()">Login</button>
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button id="loginBtn" onclick="login()">Login</button>
 
     <p class="message">Forgot password? <a href="#" onclick="forgotPassword()">Click here</a></p>
     <p class="message">New? <a href="register.html">Register</a></p>
+    <p id="status" style="color: red; margin-top: 10px;"></p>
   </div>
 
   <script>
@@ -24,12 +25,24 @@
     );
 
     async function login() {
-      const email = document.getElementById("email").value;
+      const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
+      const status = document.getElementById("status");
+      const loginBtn = document.getElementById("loginBtn");
 
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      status.textContent = "Logging in...";
+      loginBtn.disabled = true;
 
-      if (error) return alert(error.message);
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+      if (error) {
+        console.error("Login error:", error.message);
+        status.textContent = "Login failed: " + error.message;
+        loginBtn.disabled = false;
+        return;
+      }
+
+      console.log("Login successful:", data);
       window.location.href = "dashboard.html";
     }
 
@@ -41,8 +54,11 @@
         redirectTo: 'https://cyberbill1.github.io/reset-password.html'
       });
 
-      if (error) alert(error.message);
-      else alert("Reset link sent. Check your email.");
+      if (error) {
+        alert("Error: " + error.message);
+      } else {
+        alert("Password reset email sent. Please check your inbox.");
+      }
     }
   </script>
 </body>
