@@ -3,25 +3,34 @@
 <head>
   <title>Dashboard</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
   <div class="container">
-    <h2>Welcome to the Class Dashboard</h2>
-    <button class="logout-btn" onclick="logout()">Logout</button>
+    <h1>Welcome to the Class Dashboard</h1>
+    <p id="user-email"></p>
+    <button id="logoutBtn">Logout</button>
   </div>
 
-  <script>
-    const supabase =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyZnlwdWFicXphbHpxYmdlZXVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4ODA2ODgsImV4cCI6MjA2MzQ1NjY4OH0._kjP_fN499beZ6DhiXkS9M1PD9ZgBDVj6xb_Yd65d54 supabase.createClient('', '');
-    async function checkUser() {
-      const { data: { session } } = await supabase.auth.getSession();https://krfypuabqzalzqbgeeud.supabase.co
-      if (!session) window.location.href = "login.html";
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    const supabase = createClient(
+      'https://krfypuabqzalzqbgeeud.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyZnlwdWFicXphbHpxYmdlZXVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4ODA2ODgsImV4cCI6MjA2MzQ1NjY4OH0._kjP_fN499beZ6DhiXkS9M1PD9ZgBDVj6xb_Yd65d54'
+    );
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("user-email").textContent = "Logged in as: " + user.email;
     }
-    async function logout() {
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
       await supabase.auth.signOut();
       window.location.href = "login.html";
-    }
-    checkUser();
+    });
   </script>
 </body>
 </html>
